@@ -220,6 +220,8 @@ __attribute__((weak)) void keyball_on_apply_motion_to_mouse_move(keyball_motion_
 #else
 #    error("unknown Keyball model")
 #endif
+    // Save pre-acceleration mouse report for OLED (movement_size pre-accel)
+    keyball.pre_last_mouse = *r;
     adjust_mouse_speed(r);  // マウスカーソル加速用
     // clear motion
     m->x = 0;
@@ -477,8 +479,28 @@ void keyball_oled_render_ballinfo(void) {
     //
     //     Ball: -12  34   0   0
 
-    // 1st line, "Ball" label, mouse x, y, h, and v.
-    oled_write_P(PSTR("Ball\xB1"), false);
+    // 1st line: movement_size (no label) then mouse x, y, h, and v.
+    // Original labeled output (kept commented for easy restore):
+    // oled_write_P(PSTR("Ball\xB1"), false);
+    // oled_write(format_4d(keyball.last_mouse.x), false);
+    // oled_write(format_4d(keyball.last_mouse.y), false);
+    // oled_write(format_4d(keyball.last_mouse.h), false);
+    // oled_write(format_4d(keyball.last_mouse.v), false);
+
+    // Compact output: e.g. "123: -12  34   0   0"
+    {
+        uint16_t mv = movement_size_of(&keyball.pre_last_mouse);
+        if (mv > 999) {
+            mv = 999;
+        }
+        char mvbuf[4];
+        mvbuf[3] = '\0';
+        mvbuf[0] = (mv >= 100) ? ('0' + (mv / 100)) : ' ';
+        mvbuf[1] = (mv >= 10) ? ('0' + ((mv / 10) % 10)) : ' ';
+        mvbuf[2] = '0' + (mv % 10);
+        oled_write(mvbuf, false);
+        oled_write_P(PSTR(" \xB1"), false);
+    }
     oled_write(format_4d(keyball.last_mouse.x), false);
     oled_write(format_4d(keyball.last_mouse.y), false);
     oled_write(format_4d(keyball.last_mouse.h), false);
@@ -523,7 +545,8 @@ void keyball_oled_render_ballsubinfo(void) {
 #endif // OLED_ENABLE
 }
 
-void keyball_oled_render_keyinfo(void) {
+void 
+keyball_oled_render_keyinfo(void) {
 #ifdef OLED_ENABLE
     // Format: `Key :  R{row}  C{col} K{kc} {name}{name}{name}`
     //

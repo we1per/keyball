@@ -197,6 +197,7 @@ typedef struct {
     uint16_t       last_kc;
     keypos_t       last_pos;
     report_mouse_t last_mouse;
+    report_mouse_t pre_last_mouse;
 
     uint16_t auto_mouse_layer_timeout;
     layer_state_t last_layer_state;
