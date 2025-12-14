@@ -184,21 +184,21 @@ void pointing_device_driver_set_cpi(uint16_t cpi) {
 static void adjust_mouse_speed(report_mouse_t *r) {
     uint16_t movement_size = movement_size_of(r);
 
-    float speed_factor = 1.0;
-    if (movement_size > 60) {
-        speed_factor = 3.0;
-    } else if (movement_size > 30) {
-        speed_factor = 1.5;
+    float speed_factor = 1.00;
+    if (movement_size > 15) {
+        speed_factor = 2.39;
+    } else if (movement_size > 6) {
+        speed_factor = 1.84;
     } else if (movement_size > 5) {
-        speed_factor = 1.0;
+        speed_factor = 1.50;
     } else if (movement_size > 4) {
-        speed_factor = 0.9;
+        speed_factor = 1.29;
     } else if (movement_size > 3) {
-        speed_factor = 0.7;
+        speed_factor = 1.16;
     } else if (movement_size > 2) {
-        speed_factor = 0.5;
+        speed_factor = 1.08;
     } else if (movement_size > 1) {
-        speed_factor = 0.2;
+        speed_factor = 1.03;
     }
 
     r->x = clip2int8(r->x * speed_factor);
