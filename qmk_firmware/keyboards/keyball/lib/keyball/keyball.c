@@ -186,21 +186,21 @@ static void adjust_mouse_speed(report_mouse_t *r) {
 
     float speed_factor = 1.00;
     if (movement_size > 15) {
-        speed_factor = 4.69;
+        speed_factor = 3.28;
     } else if (movement_size > 10) {
-        speed_factor = 3.25;
+        speed_factor = 2.39;
     } else if (movement_size > 6) {
-        speed_factor = 2.36;
+        speed_factor = 1.84;
     } else if (movement_size > 5) {
-        speed_factor = 1.81;
+        speed_factor = 1.50;
     } else if (movement_size > 4) {
-        speed_factor = 1.47;
+        speed_factor = 1.29;
     } else if (movement_size > 3) {
-        speed_factor = 1.26;
+        speed_factor = 1.16;
     } else if (movement_size > 2) {
-        speed_factor = 1.13;
+        speed_factor = 1.08;
     } else if (movement_size > 1) {
-        speed_factor = 1.05;
+        speed_factor = 1.03;
     }
 
     r->x = clip2int8(r->x * speed_factor);
