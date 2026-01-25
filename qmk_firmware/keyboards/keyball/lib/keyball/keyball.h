@@ -127,9 +127,9 @@ enum keyball_keycodes {
     AML_ESC4 = QK_KB_24,
 
     // カスタムキーコード
-    GRP_COL  = QK_KB_19, // 列選択してグループ化
-    UNG_COL  = QK_KB_20, // 列選択してグループ解除
-    TMS_MTG  = QK_KB_25, // TeamsのマイクON/OFF切替。以前はKb30
+    // GRP_COL  = QK_KB_19, // 列選択してグループ化
+    // UNG_COL  = QK_KB_20, // 列選択してグループ解除
+    // TMS_MTG  = QK_KB_25, // TeamsのマイクON/OFF切替。以前はKb30
     EXL_FLT  = QK_KB_26, // Excelフィルタ用
     MHEN_CW  = QK_KB_27, // Caps Word用
 
