@@ -143,7 +143,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 enum combo_events {
   PARENTHESES,
   SQUARE_BRACKETS,
-  CURLY_BRACKETS,
+//   CURLY_BRACKETS,
   PASTE_VALUE,
   CMB_ALTTAB,
   COMBO_COUNT  // Comboの数を自動計算
@@ -151,14 +151,14 @@ enum combo_events {
 
 const uint16_t PROGMEM paren_combo[] = {KC_G, KC_H, COMBO_END};
 const uint16_t PROGMEM sqbra_combo[] = {KC_T, KC_Y, COMBO_END};
-const uint16_t PROGMEM cubra_combo[] = {KC_B, KC_N, COMBO_END};
+// const uint16_t PROGMEM cubra_combo[] = {KC_B, KC_N, COMBO_END};
 const uint16_t PROGMEM paste_combo[] = {KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_alttab[] = {KC_D, KC_F, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
   [PARENTHESES] = COMBO_ACTION(paren_combo),
   [SQUARE_BRACKETS] = COMBO_ACTION(sqbra_combo),
-  [CURLY_BRACKETS] = COMBO_ACTION(cubra_combo),
+//   [CURLY_BRACKETS] = COMBO_ACTION(cubra_combo),
   [PASTE_VALUE] = COMBO_ACTION(paste_combo),
   [CMB_ALTTAB] = COMBO(combo_alttab, KC_NO), // KC_NO to leave processing for process_combo_event
 };
@@ -183,12 +183,12 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
         tap_code(KC_BSLS);
       }
       break;
-    case CURLY_BRACKETS:
-      if (pressed) {
-        tap_code16(S(KC_RBRC));
-        tap_code16(S(KC_BSLS));
-      }
-      break;
+    // case CURLY_BRACKETS:
+    //   if (pressed) {
+    //     tap_code16(S(KC_RBRC));
+    //     tap_code16(S(KC_BSLS));
+    //   }
+    //   break;
     case PASTE_VALUE:
       if (pressed) {
         tap_code16(C(S(KC_V)));
