@@ -190,7 +190,7 @@ static void adjust_mouse_speed(report_mouse_t *r) {
     } else if (movement_size > 10) {
         speed_factor = 2.39;
     } else if (movement_size > 6) {
-        speed_factor = 1.84;
+        speed_factor = 1.84;  // これがデフォルト。以降は緩やかに加速。
     } else if (movement_size > 5) {
         speed_factor = 1.50;
     } else if (movement_size > 4) {
